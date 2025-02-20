@@ -2,7 +2,7 @@
 function populateYearDropdown() {
     const yearSelect = document.getElementById('year-select');
     // Populate years from 2025 to 2030
-    for (let year = 2025; year <= 2030; year++) {
+    for (let year = 2025; year <= 2031; year++) {
         const option = document.createElement('option');
         option.value = year;
         option.textContent = year;
@@ -100,33 +100,41 @@ function getBahaIMonths(nawruzDate, nawruzDateNextYear) {
     const bahaIMonths = [
         { name: "'Alá' (the Fast leading to Naw Ruz)", daysAfterNawruz: -19 },
         { name: "Bahá", daysAfterNawruz: 0 },
-        { name: "Jalál", daysAfterNawruz: 0 },
-        { name: "Jamál", daysAfterNawruz: 0 },
-        { name: "'Azamat", daysAfterNawruz: 0 },
-        { name: "Núr", daysAfterNawruz: 0 },
-        { name: "Rahmat", daysAfterNawruz: 0 },
-        { name: "Kalimát", daysAfterNawruz: 0 },
-        { name: "Kamál", daysAfterNawruz: 0 },
-        { name: "Asmá'", daysAfterNawruz: 0 },
-        { name: "'Izzat", daysAfterNawruz: 0 },
-        { name: "Mashíyyat", daysAfterNawruz: 0 },
-        { name: "Ilm", daysAfterNawruz: 0 },
-        { name: "Qudrat", daysAfterNawruz: 0 },
-        { name: "Qawl", daysAfterNawruz: 0 },
-        { name: "Masá'il", daysAfterNawruz: 0 },
-        { name: "Sharaf", daysAfterNawruz: 0 },
-        { name: "Sultán", daysAfterNawruz: 0 },
-        { name: "Mulk", daysAfterNawruz: 0 },
+        { name: "Jalál", daysAfterNawruz: 19 },
+        { name: "Jamál", daysAfterNawruz: 38 },
+        { name: "'Azamat", daysAfterNawruz: 57 },
+        { name: "Núr", daysAfterNawruz: 76 },
+        { name: "Rahmat", daysAfterNawruz: 95 },
+        { name: "Kalimát", daysAfterNawruz: 114 },
+        { name: "Kamál", daysAfterNawruz: 133 },
+        { name: "Asmá'", daysAfterNawruz: 152 },
+        { name: "'Izzat", daysAfterNawruz: 171 },
+        { name: "Mashíyyat", daysAfterNawruz: 190 },
+        { name: "Ilm", daysAfterNawruz: 209 },
+        { name: "Qudrat", daysAfterNawruz: 228 },
+        { name: "Qawl", daysAfterNawruz: 247 },
+        { name: "Masá'il", daysAfterNawruz: 266 },
+        { name: "Sharaf", daysAfterNawruz: 285 },
+        { name: "Sultán", daysAfterNawruz: 304 },
+        { name: "Mulk", daysAfterNawruz: 323 },
         { name: "Ayyám-i-Há", daysAfterNawruz: 0 }, // Starts 342 days after Naw Ruz
-        { name: "'Alá' (the Last Month)", daysAfterNawruz: -20 }, // Starts 20 days before the next Naw Ruz
+        { name: "'Alá' (the Last Month)", daysAfterNawruz: 0 }, // Starts 20 days before the next Naw Ruz
     ];
 
+
+
+
     let startDate = nawruzDate;
+
+
+// For Baha'i months, get the start date, add the days after naw ruz, 
+// set the end date to 18 days after the start, 
+// and then {commented out bit} set the start date of the next month to the next day after that
     let months = bahaIMonths.map((month, index) => {
         const startOfMonth = new Date(startDate);
         startOfMonth.setDate(startOfMonth.getDate() + month.daysAfterNawruz);
         const endOfMonth = addDays(startOfMonth, 18); // Each Baha'i month is 19 days long
-        startDate = addDays(endOfMonth, 1); // Start of the next month
+        //startDate = addDays(endOfMonth, 1); // Start of the next month
         return { name: month.name, start: startOfMonth, end: endOfMonth };
     });
 
