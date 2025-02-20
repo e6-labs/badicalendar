@@ -142,7 +142,7 @@ function getBahaIMonths(nawruzDate, nawruzDateNextYear) {
     const ayyamiHaStart = addDays(nawruzDate, 342); // 342 days after Naw Ruz
     
     // Ayyám-i-Há end is 21 days before next year's Naw Ruz
-    let ayyamiHaEnd = addDays(nawruzDateNextYear, -21); // 21 days before next Naw Ruz
+    let ayyamiHaEnd = addDays(nawruzDateNextYear, -20); // 21 days before next Naw Ruz
     
     // Adjust Ayyám-i-Há end date for leap year
     // if (isLeapYear(nawruzDateNextYear.getFullYear())) {
@@ -154,7 +154,7 @@ function getBahaIMonths(nawruzDate, nawruzDateNextYear) {
     months[months.length - 2].end = ayyamiHaEnd; // Correct Ayyám-i-Há end date
 
     // Correct Ala period calculation for the end of the year
-    const alaStart = addDays(nawruzDateNextYear, -20); // Ala starts 20 days before Naw Ruz of the next year
+    const alaStart = addDays(nawruzDateNextYear, -19); // Ala starts 20 days before Naw Ruz of the next year
     const alaEnd = addDays(nawruzDateNextYear, -1); // Ala ends 19 days after the start (March 20, 2026)
     // if (isLeapYear(nawruzDateNextYear.getFullYear())) {
     //     // If next year's Naw Ruz is a leap year, Ayyám-i-Há end may fall on Feb 29
