@@ -115,7 +115,7 @@ function getBahaIMonths(nawruzDate, nawruzDateNextYear) {
         { name: "Qawl", daysAfterNawruz: 247 },
         { name: "Masá'il", daysAfterNawruz: 266 },
         { name: "Sharaf", daysAfterNawruz: 285 },
-        { name: "Sultán1", daysAfterNawruz: 304 },
+        { name: "Sultán2", daysAfterNawruz: 304 },
         { name: "Mulk", daysAfterNawruz: 323 },
         { name: "Ayyám-i-Há", daysAfterNawruz: 0 }, // Starts 342 days after Naw Ruz
         { name: "'Alá' (the Last Month)", daysAfterNawruz: 0 }, // Starts 20 days before the next Naw Ruz
