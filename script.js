@@ -1,8 +1,8 @@
 // Function to populate the year dropdown dynamically
 function populateYearDropdown() {
     const yearSelect = document.getElementById('year-select');
-    // Populate years from 2025 to 2030
-    for (let year = 2025; year <= 2031; year++) {
+    // Populate years from 2025 to 2031
+    for (let year = 182; year <= 188; year++) {
         const option = document.createElement('option');
         option.value = year;
         option.textContent = year;
@@ -13,22 +13,22 @@ function populateYearDropdown() {
 // Function to get the Birth of the Bab date for the selected year
 function getBirthOfTheBabDate(year) {
     const birthOfTheBabDates = {
-        2025: "October 22",
-        2026: "November 10",
-        2027: "October 30",
-        2028: "October 19",
-        2029: "November 7",
-        2030: "October 28",
-        2031: "October 17",
-        2032: "November 4"
+        182: "October 22",
+        183: "November 10",
+        184: "October 30",
+        185: "October 19",
+        186: "November 7",
+        187: "October 28",
+        188: "October 17",
+        189: "November 4"
     };
-    return new Date(`${birthOfTheBabDates[year]} ${year}`);
+    return new Date(`${birthOfTheBabDates[year]} ${year + 1843}`);
 }
 
 // Helper function to format a Date object to a string in the format "Weekday, Month Day"
 function formatDate(date) {
-    const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-AU', options);
+    const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
 }
 
 // Helper function to add days to a date and ensure the correct year is set
@@ -45,15 +45,37 @@ function getNextDay(date) {
     return nextDay;
 }
 
-// Function to check if a year is a leap year
-function isLeapYear(year) {
-    return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+// Function to get the Naw Ruz date for the selected year
+function getNawruzDate(year) {
+    const nawruzDates = {
+        182: "March 20",
+        183: "March 21",
+        184: "March 21",
+        185: "March 20",
+        186: "March 20",
+        187: "March 20",
+        188: "March 21",
+        189: "March 20",
+        190: "March 20",
+        191: "March 20",
+        192: "March 21",
+        193: "March 20",
+        194: "March 20",
+        195: "March 20",
+        196: "March 21",
+        197: "March 20",
+        198: "March 20",
+        199: "March 20",
+        200: "March 21",
+        201: "March 20"
+    };
+    return new Date(`${nawruzDates[year]} ${year + 1843}`);
 }
 
 // Function to generate the Baha'i holy days based on Naw Ruz and the Birth of the Bab calculation
 function getBahaIHolyDays(year, nawruzDate) {
     const birthOfTheBabDate = getBirthOfTheBabDate(year);
-    const birthOfBahaUllahDate = getNextDay(birthOfTheBabDate);
+    const birthOfBahaUllahDate = addDays(birthOfTheBabDate,1);
 
     return [
         { name: "Nawruz", date: formatDate(nawruzDate) },
@@ -68,102 +90,33 @@ function getBahaIHolyDays(year, nawruzDate) {
     ];
 }
 
-// Function to get the Naw Ruz date for the selected year
-function getNawruzDate(year) {
-    const nawruzDates = {
-        2025: "March 20",
-        2026: "March 21",
-        2027: "March 21",
-        2028: "March 20",
-        2029: "March 20",
-        2030: "March 20",
-        2031: "March 21",
-        2032: "March 20",
-        2033: "March 20",
-        2034: "March 20",
-        2035: "March 21",
-        2036: "March 20",
-        2037: "March 20",
-        2038: "March 20",
-        2039: "March 21",
-        2040: "March 20",
-        2041: "March 20",
-        2042: "March 20",
-        2043: "March 21",
-        2044: "March 20"
-    };
-    return new Date(`${nawruzDates[year]} ${year}`);
-}
+function getBahaIMonthDays(nawruzDate,nawruzDateNextYear) {
+   
+    return [
+        { name: "Bahá", startdate: formatDate(addDays(nawruzDate, 0)), enddate: formatDate(addDays(nawruzDate, 18)) },
+        { name: "Jalál", startdate: formatDate(addDays(nawruzDate, 19)), enddate: formatDate(addDays(nawruzDate, 37)) },
+        { name: "Jamál", startdate: formatDate(addDays(nawruzDate, 38)), enddate: formatDate(addDays(nawruzDate, 56)) },
+        { name: "'Azamat", startdate: formatDate(addDays(nawruzDate, 57)), enddate: formatDate(addDays(nawruzDate, 75)) },
+        { name: "Núr", startdate: formatDate(addDays(nawruzDate, 76)), enddate: formatDate(addDays(nawruzDate, 94)) },
+        { name: "Rahmat", startdate: formatDate(addDays(nawruzDate, 95)), enddate: formatDate(addDays(nawruzDate, 113)) },
+        { name: "Kalimát", startdate: formatDate(addDays(nawruzDate, 114)), enddate: formatDate(addDays(nawruzDate, 132)) },
+        { name: "Kamál", startdate: formatDate(addDays(nawruzDate, 133)), enddate: formatDate(addDays(nawruzDate, 151)) },
+        { name: "Asmá'", startdate: formatDate(addDays(nawruzDate, 152)), enddate: formatDate(addDays(nawruzDate, 170)) },
+        { name: "'Izzat", startdate: formatDate(addDays(nawruzDate, 171)), enddate: formatDate(addDays(nawruzDate, 189)) },
+        { name: "Mashíyyat", startdate: formatDate(addDays(nawruzDate, 190)), enddate: formatDate(addDays(nawruzDate, 208)) },
+        { name: "Ilm", startdate: formatDate(addDays(nawruzDate, 209)), enddate: formatDate(addDays(nawruzDate, 227)) },
+        { name: "Qudrat", startdate: formatDate(addDays(nawruzDate, 228)), enddate: formatDate(addDays(nawruzDate, 246)) },
+        { name: "Qawl", startdate: formatDate(addDays(nawruzDate, 247)), enddate: formatDate(addDays(nawruzDate, 265)) },
+        { name: "Masá'il", startdate: formatDate(addDays(nawruzDate, 266)), enddate: formatDate(addDays(nawruzDate, 284)) },
+        { name: "Sharaf", startdate: formatDate(addDays(nawruzDate, 285)), enddate: formatDate(addDays(nawruzDate, 303)) },
+        { name: "Sultán", startdate: formatDate(addDays(nawruzDate, 304)), enddate: formatDate(addDays(nawruzDate, 322))},
+        { name: "Mulk", startdate: formatDate(addDays(nawruzDate, 323)), enddate: formatDate(addDays(nawruzDate, 341)) },
+        { name: "Ayyám-i-Há", startdate: formatDate(addDays(nawruzDate, 342)), enddate: formatDate(addDays(nawruzDateNextYear, -20)) }, // Starts 342 days after Naw Ruz
+        { name: "'Alá'", startdate: formatDate(addDays(nawruzDate, -19)), enddate: formatDate(addDays(nawruzDateNextYear, -1)) } // Starts 20 days before the next Naw Ruz
 
-// Function to get the Baha'i months for the given year and Naw Ruz date
-function getBahaIMonths(nawruzDate, nawruzDateNextYear) {
-    const bahaIMonths = [
-        { name: "'Alá' (the Fast leading to Naw Ruz)", daysAfterNawruz: -19 },
-        { name: "Bahá", daysAfterNawruz: 0 },
-        { name: "Jalál", daysAfterNawruz: 19 },
-        { name: "Jamál", daysAfterNawruz: 38 },
-        { name: "'Azamat", daysAfterNawruz: 57 },
-        { name: "Núr", daysAfterNawruz: 76 },
-        { name: "Rahmat", daysAfterNawruz: 95 },
-        { name: "Kalimát", daysAfterNawruz: 114 },
-        { name: "Kamál", daysAfterNawruz: 133 },
-        { name: "Asmá'", daysAfterNawruz: 152 },
-        { name: "'Izzat", daysAfterNawruz: 171 },
-        { name: "Mashíyyat", daysAfterNawruz: 190 },
-        { name: "Ilm", daysAfterNawruz: 209 },
-        { name: "Qudrat", daysAfterNawruz: 228 },
-        { name: "Qawl", daysAfterNawruz: 247 },
-        { name: "Masá'il", daysAfterNawruz: 266 },
-        { name: "Sharaf", daysAfterNawruz: 285 },
-        { name: "Sultán2", daysAfterNawruz: 304 },
-        { name: "Mulk", daysAfterNawruz: 323 },
-        { name: "Ayyám-i-Há", daysAfterNawruz: 0 }, // Starts 342 days after Naw Ruz
-        { name: "'Alá' (the Last Month)", daysAfterNawruz: 0 }, // Starts 20 days before the next Naw Ruz
+
     ];
 
-
-
-
-    let startDate = nawruzDate;
-
-
-// For Baha'i months, get the start date, add the days after naw ruz, 
-// set the end date to 18 days after the start, 
-// and then {commented out bit} set the start date of the next month to the next day after that
-    let months = bahaIMonths.map((month, index) => {
-        const startOfMonth = new Date(startDate);
-        startOfMonth.setDate(startOfMonth.getDate() + month.daysAfterNawruz);
-        const endOfMonth = addDays(startOfMonth, 18); // Each Baha'i month is 19 days long
-        //startDate = addDays(endOfMonth, 1); // Start of the next month
-        return { name: month.name, start: startOfMonth, end: endOfMonth };
-    });
-
-    // Ayyám-i-Há starts 342 days after Nawruz
-    const ayyamiHaStart = addDays(nawruzDate, 342); // 342 days after Naw Ruz
-    
-    // Ayyám-i-Há end is 21 days before next year's Naw Ruz
-    let ayyamiHaEnd = addDays(nawruzDateNextYear, -20); // 21 days before next Naw Ruz
-    
-    // Adjust Ayyám-i-Há end date for leap year
-    // if (isLeapYear(nawruzDateNextYear.getFullYear())) {
-    //     // If next year's Naw Ruz is a leap year, Ayyám-i-Há end may fall on Feb 29
-    //     ayyamiHaEnd = addDays(ayyamiHaEnd, 1); // Adjust for Feb 29
-    // }
-
-    months[months.length - 2].start = ayyamiHaStart; // Correct Ayyám-i-Há start date
-    months[months.length - 2].end = ayyamiHaEnd; // Correct Ayyám-i-Há end date
-
-    // Correct Ala period calculation for the end of the year
-    const alaStart = addDays(nawruzDateNextYear, -19); // Ala starts 20 days before Naw Ruz of the next year
-    const alaEnd = addDays(nawruzDateNextYear, -1); // Ala ends 19 days after the start (March 20, 2026)
-    // if (isLeapYear(nawruzDateNextYear.getFullYear())) {
-    //     // If next year's Naw Ruz is a leap year, Ayyám-i-Há end may fall on Feb 29
-    //     alaStart = addDays(alaStart, 1); // Adjust for Feb 29
-    // }
-    months[months.length - 1].start = alaStart;
-    months[months.length - 1].end = alaEnd;
-
-    return months;
 }
 
 // Function to fetch and display the Baha'i calendar dates for the selected year
@@ -171,7 +124,7 @@ function displayBahaICalendar(year) {
     const nawruzDate = getNawruzDate(year); // Get the Naw Ruz date for the selected year
     const nawruzDateNextYear = getNawruzDate(year + 1); // Get Naw Ruz date for the subsequent year
     const holyDays = getBahaIHolyDays(year, nawruzDate); // Get all the holy days
-    const months = getBahaIMonths(nawruzDate, nawruzDateNextYear);
+    const months = getBahaIMonthDays(nawruzDate, nawruzDateNextYear);
 
     const datesList = document.getElementById('dates-list');
     const monthsList = document.getElementById('baha-i-months');
@@ -181,15 +134,15 @@ function displayBahaICalendar(year) {
 
     // Display Holy Days
     holyDays.forEach((holyDay) => {
-        const li = document.createElement('li');
-        li.textContent = `${holyDay.name}: ${holyDay.date}`;
-        datesList.appendChild(li);
+        const holydayItem = document.createElement('li');
+        holydayItem.textContent = `${holyDay.name}: ${holyDay.date}`;
+        datesList.appendChild(holydayItem);
     });
 
     // Display Baha'i Months
     months.forEach((month) => {
         const monthItem = document.createElement('li');
-        monthItem.textContent = `${month.name}: ${formatDate(month.start)} to ${formatDate(month.end)}`;
+        monthItem.textContent = `${month.name}: ${month.startdate} to ${month.enddate}`;
         monthsList.appendChild(monthItem);
     });
 }
@@ -202,6 +155,6 @@ document.getElementById('year-select').addEventListener('change', (event) => {
 
 // Initialize the page with the current year selected
 populateYearDropdown();
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear() - 1843;
 document.getElementById('year-select').value = currentYear;
 displayBahaICalendar(currentYear);
